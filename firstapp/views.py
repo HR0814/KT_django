@@ -26,3 +26,10 @@ def insert(request):
     Curriculum(name='django').save()
 
     return HttpResponse('ok')
+
+def show(request):
+    curriculum = Curriculum.objects.all()
+    result = ''
+    for c in curriculum:
+        result += c.name + '<br>'
+    return HttpResponse(result)
