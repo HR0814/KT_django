@@ -28,8 +28,14 @@ def insert(request):
     return HttpResponse('ok')
 
 def show(request):
+    # curriculum = Curriculum.objects.all()
+    # result = ''
+    # for c in curriculum:
+    #     result += c.name + '<br>'
+    # return HttpResponse(result)
+
     curriculum = Curriculum.objects.all()
-    result = ''
-    for c in curriculum:
-        result += c.name + '<br>'
-    return HttpResponse(result)
+    return render(
+        request, 'firstapp/show.html', 
+        {'score': 100, 'data': curriculum}
+    )

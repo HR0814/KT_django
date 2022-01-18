@@ -20,8 +20,13 @@ def insert(request):
 
 def show(request):
     course = Course.objects.all()
-    result = ''
-    for c in course:
-        result += '%s %s<br>' % (c.name, c.cnt)
+    # result = ''
+    # for c in course:
+    #     result += '%s %s<br>' % (c.name, c.cnt)
 
-    return HttpResponse(result)
+    # return HttpResponse(result)
+
+    return render(
+        request, 'secondapp/show.html',
+        { 'data': course }
+)
