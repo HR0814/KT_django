@@ -8,7 +8,7 @@ def main(request):
 
 
 # import secondapp.models as models
-from .models import Course
+from .models import ArmyShop, Course
 
 def insert(request):
     Course(name='데이터 분석',cnt=30).save()
@@ -26,7 +26,9 @@ def show(request):
 
     # return HttpResponse(result)
 
+def army_shop(request):
+    shop = ArmyShop.objects.all()
     return render(
-        request, 'secondapp/show.html',
-        { 'data': course }
+        request, 'secondapp/army_shop.html',
+        { 'data': shop }
 )
