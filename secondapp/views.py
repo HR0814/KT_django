@@ -28,7 +28,14 @@ def show(request):
     # return HttpResponse(result)
 
 def army_shop(request):
-    shop = ArmyShop.objects.all()
+    prd = request.GET.get('prd')
+    # prd = request.GET.get('prd', '')
+
+    try:
+        shop = ArmyShop.objects.filter(name__contains=prd)
+    except:
+        shop = ArmyShop.objects.all()
+
     return render(
         request, 'secondapp/army_shop.html',
         { 'data': shop }
