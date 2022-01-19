@@ -1,3 +1,11 @@
 from django.shortcuts import render
+from .models import Shop
 
-# Create your views here.
+def shop(request):
+    shop_list = Shop.objects.all()
+    
+    return render(
+        request,
+        'thirdapp/shop.html',
+        {'shop_list': shop_list}
+)
