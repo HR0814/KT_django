@@ -1,4 +1,5 @@
 from http.client import HTTPResponse
+from unittest import result
 from django.shortcuts import render
 from django.http import HttpResponse
 
@@ -32,3 +33,14 @@ def army_shop(request):
         request, 'secondapp/army_shop.html',
         { 'data': shop }
 )
+def army_shop2(request, year, month):
+    shop = ArmyShop.objects.filter(year=year, month=month)
+    
+    # result = ''
+    # for i in shop:
+    #     result += '%s %s %s<br>' %(i.year, i.month, i.name)
+    # return HTTPResponse(result)
+
+    result = ['%s %s %s<br>' %(i.year, i.month, i.name) for i in shop ]
+
+    return HttpResponse(''.join(result))
