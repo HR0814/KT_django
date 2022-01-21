@@ -1,7 +1,9 @@
 from http.client import HTTPResponse
 from unittest import result
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
+
+from secondapp.forms import CourseForm
 
 # Create your views here.
 def main(request):
@@ -70,3 +72,19 @@ def ajaxGet(request):
 def ajaxExam(request):
     
     return render(request, 'secondapp/ajax_exam.html')
+
+def course_create(request):
+    if request.method == 'POST':
+        form = CourseForm(request.POST)
+        if form.is_valid():
+            # 데이터 저장
+            course = form.save(commit=False)
+            course.save()
+
+            # 어딘가로 이동, 메시지 출력
+            return redirect('firstapp:post') 
+    else:
+        form = CourseForm()
+
+
+    return render(request, 'secondapp/course_create.html', {'form':form})
